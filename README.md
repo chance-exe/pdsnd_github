@@ -1,7 +1,7 @@
 ## US Bikeshare Project
 
-### Date created
-US Bikeshare project originally created 09/07/21
+### Date Created
+US Bikeshare project originally created 09/07/21\
 README file created 26/07/21
 
 ### Description
