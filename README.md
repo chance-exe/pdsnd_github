@@ -12,8 +12,13 @@ The dataset used is provided by Motivate, a bike share system provider for many 
 The user will be asked what information they would like to view based on city, month and day.\
 Statistics will be calculated based on the user's input and upon request, raw data can be viewed.
 
-### Files used
-Include the files used
+### Files Used
+bikeshare_2.py
+
+The following files are required but have been removed for project submission requirements:
+- chicago.csv
+- new_york_city.csv
+- washington.csv
 
 ### Credits
 It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
