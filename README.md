@@ -5,7 +5,12 @@ US Bikeshare project originally created 09/07/21\
 README file created 26/07/21
 
 ### Description
-Describe what your project is about and what it does
+The US Bikeshare Project allows a user to explore a small section of data related to bike share systems for Chicago, New York City and Washington.\
+The dataset used is provided by Motivate, a bike share system provider for many major cities in the United States.
+
+
+The user will be asked what information they would like to view based on city, month and day.\
+Statistics will be calculated based on the user's input and upon request, raw data can be viewed.
 
 ### Files used
 Include the files used
