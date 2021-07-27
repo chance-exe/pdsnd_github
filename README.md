@@ -21,5 +21,11 @@ The following files are required but have been removed for project submission re
 - washington.csv
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
-
+The following websites are references used to create the US Bikeshare Project:
+- https://docs.python.org/3/
+- https://www.askpython.com/python/examples/exit-a-python-program
+- https://knowledge.udacity.com/questions/589575
+- https://knowledge.udacity.com/questions/263877
+- https://knowledge.udacity.com/questions/169734
+- https://knowledge.udacity.com/questions/521382
+- https://knowledge.udacity.com/questions/56970
