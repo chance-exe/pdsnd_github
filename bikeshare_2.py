@@ -3,6 +3,7 @@ import datetime
 import pandas as pd
 import numpy as np
 
+# NOTE: The following csv files have not been included in repo due to Project 3 submission requirements
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
