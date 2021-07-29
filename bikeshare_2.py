@@ -7,7 +7,7 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
-months = ['january', 'february', 'march', 'april', 'may', 'june']
+MONTHS = ['january', 'february', 'march', 'april', 'may', 'june']
 
 def get_filters():
     """
@@ -161,7 +161,7 @@ def load_data(city, month, day):
     # filter by month if applicable
     if month != 'all':
         # use the index of the months list to get the corresponding int
-        month = months.index(month) + 1
+        month = MONTHS.index(month) + 1
     
         # filter by month to create the new dataframe
         df = df[df['Month'] == month]
@@ -196,7 +196,7 @@ def time_stats(df):
     # display the most common month      
     df['Month'] = df['Start Time'].dt.month    
     popular_month = df['Month'].mode()[0]
-    month_name = months[popular_month - 1] # Taking index 0 into account
+    month_name = MONTHS[popular_month - 1] # Taking index 0 into account
 
     print('The busiest month is ' + month_name.title())
 
