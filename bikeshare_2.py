@@ -8,7 +8,8 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
-months = ['january', 'february', 'march', 'april', 'may', 'june']
+MONTHS = ['january', 'february', 'march', 'april', 'may', 'june']
+
 
 def get_filters():
     """
@@ -41,7 +42,7 @@ def get_filters():
             print('\nBye!\n')
             quit()
         else:
-            print('\nError! Please enter a number or city name listed above\n')           
+            print('\nError! Please enter a number or city name listed above\n')          
         
     print('\n' + city.title() + ' selected')
     
@@ -162,7 +163,7 @@ def load_data(city, month, day):
     # filter by month if applicable
     if month != 'all':
         # use the index of the months list to get the corresponding int
-        month = months.index(month) + 1
+        month = MONTHS.index(month) + 1
     
         # filter by month to create the new dataframe
         df = df[df['Month'] == month]
@@ -172,7 +173,9 @@ def load_data(city, month, day):
         # filter by day of week to create the new dataframe
         df = df[df['Day'] == day.title()]
         
-    # Uncomment print statement and comment out return statement to test code    
+    # FOR DEBUG PURPOSES
+    #Uncomment print statement and comment out return statement to test code
+    
     #print(df) 
 
     return df
@@ -197,7 +200,7 @@ def time_stats(df):
     # display the most common month      
     df['Month'] = df['Start Time'].dt.month    
     popular_month = df['Month'].mode()[0]
-    month_name = months[popular_month - 1] # Taking index 0 into account
+    month_name = MONTHS[popular_month - 1] # Taking index 0 into account
 
     print('The busiest month is ' + month_name.title())
 
@@ -319,12 +322,13 @@ def trip_duration_stats(df):
     print('-'*100)
 
 
-def user_stats(df):
+def user_stats(df, is_washington):
     """
     Displays statistics on bikeshare users.
     
     Args:
         df -  Pandas DataFrame containing city data filtered by month and day
+        (bool) is_washington - determines if city is Washington
     Returns:
         - Prints user type counts for specified city and time frame in df
         - Prints user gender counts for specified city and time frame in df
@@ -333,61 +337,34 @@ def user_stats(df):
 
     print('\nCalculating User Stats...\n')
     start_time = time.time()
-    
+
     # Display counts of user types
     user_types = str(df['User Type'].value_counts())
     user_types = user_types.replace("Name: User Type, dtype: int64", "") # formatting
     
     print(user_types)
-
-    # Display counts of gender 
-    user_gender = str(df['Gender'].value_counts())
-    user_gender = user_gender.replace("Name: Gender, dtype: int64", "") # formatting
     
-    print(user_gender)
+    # Display counts of gender 
+    if is_washington:
+        print("User gender data not available")
+    else:
+        user_gender = str(df['Gender'].value_counts())
+        user_gender = user_gender.replace("Name: Gender, dtype: int64", "") # formatting
+        
+        print(user_gender)
 
     # Display earliest, most recent, and most common year of birth
-    earliest_birth_year = int(df['Birth Year'].min())   
-    print("The earliest user birth year is " + str(earliest_birth_year))
-    
-    latest_birth_year = int(df['Birth Year'].max())
-    print("The most recent user birth year is " + str(latest_birth_year))
-    
-    common_birth_year = int(df['Birth Year'].mode()[0])
-    print("The most common user birth year is " + str(common_birth_year))
-    
-
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*100)
-
-
-def washington_user_stats(df):
-    """
-        Displays statistics on bikeshare users for Washington.
-    
-    Args:
-        df -  Pandas DataFrame containing Washington data filtered by month and day
-    Returns:
-        - Prints user type counts for Washington and specified time frame in df
-        - Prints missing gender data message
-        - Prints missing birth year data message
-    """
-    
-    print('\nCalculating User Stats...\n')
-    start_time = time.time()
-    
-    # Display counts of user types
-    user_types = str(df['User Type'].value_counts())
-    user_types = user_types.replace("Name: User Type, dtype: int64", "") # formatting
-    
-    print(user_types)
-
-    # Display counts of gender 
-    print("User gender data not available")
-
-    # Display earliest, most recent, and most common year of birth
-    print("User birth year data not available")
-    
+    if is_washington:
+        print("User birth year data not available")
+    else:    
+        earliest_birth_year = int(df['Birth Year'].min())   
+        print("The earliest user birth year is " + str(earliest_birth_year))
+        
+        latest_birth_year = int(df['Birth Year'].max())
+        print("The most recent user birth year is " + str(latest_birth_year))
+        
+        common_birth_year = int(df['Birth Year'].mode()[0])
+        print("The most common user birth year is " + str(common_birth_year))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*100)
@@ -418,7 +395,6 @@ def raw_data(df):
                 last += 5
                 loop_counter += 1
                 
-        #if view_df.lower() == 'y' or view_df.lower() == 'yes':
             while current <= last:
                 print(df[df.columns[0:-1]].iloc[current])
                 current += 1
@@ -429,7 +405,7 @@ def raw_data(df):
 
 def main():
     while True:
-    
+        
         city, month, day = get_filters()
         df = load_data(city, month, day)
 
@@ -438,9 +414,9 @@ def main():
         trip_duration_stats(df)
         
         if city == 'washington':
-            washington_user_stats(df)
+            user_stats(df, True)
         else:
-            user_stats(df)
+            user_stats(df, False)
             
         raw_data(df)
 
