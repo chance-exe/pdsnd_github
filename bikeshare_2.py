@@ -172,7 +172,9 @@ def load_data(city, month, day):
         # filter by day of week to create the new dataframe
         df = df[df['Day'] == day.title()]
         
-    # Uncomment print statement and comment out return statement to test code    
+    # FOR DEBUG PURPOSES
+    #Uncomment print statement and comment out return statement to test code
+    
     #print(df) 
 
     return df
@@ -392,7 +394,6 @@ def raw_data(df):
                 last += 5
                 loop_counter += 1
                 
-        #if view_df.lower() == 'y' or view_df.lower() == 'yes':
             while current <= last:
                 print(df[df.columns[0:-1]].iloc[current])
                 current += 1
